@@ -7,5 +7,6 @@
                  [org.jcodec/jcodec "0.1.3"
                   :exclusions [[jmxflib/jmxflib :extension "jar"]]]]
   :main ^:skip-aot gisforgif.core
+  :java-source-paths ["src/java"]
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
