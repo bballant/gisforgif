@@ -38,7 +38,6 @@
   (let
     [fg (frame-grab filein)
      e (encoder fileout)]
-    (println (str (type first-frame) " " (type n-frames)))
     (doseq [i (range first-frame (+ first-frame n-frames))]
       (let [frame
             (try
