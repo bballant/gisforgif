@@ -16,7 +16,7 @@
 (defn encoder [out]
   (doto (AnimatedGifEncoder.)
     (.start out)
-    (.setDelay 60)
+    (.setDelay 30)
     (.setRepeat 0)))
 
 (defn write-frame-to-file [fg i]
@@ -49,6 +49,32 @@
             (.addFrame e (scale-frame frame 0.5)))
           (println (str "bad frame " i)))))
     (.finish e)))
+
+(defn mov-dirs [dir]
+  (filter
+    #(.endsWith (.getName %) "MOV")
+    (file-seq (io/file dir))))
+
+(defn rando-mov [dir-seq]
+  (nth dir-seq (rand-int (count dir-seq))))
+
+(defn make-rand-gif [i]
+  (let
+    [filein (.getAbsolutePath
+              (rando-mov
+                (mov-dirs
+                  "/Users/bballantine/Google Drive/iMovie Events.localized")))
+     fileout (str "out/out" i ".gif")
+     first-frame (rand-int 100)
+     n-frames 60]
+    (println filein fileout first-frame n-frames)
+    (make-gif filein fileout first-frame n-frames)))
+
+(defn make-20-random-gifs []
+  (doseq [i (range 0 20)]
+    (make-rand-gif i)))
+
+
 
 (defn -main
   "Me take movie. Me grab frames. Me make animated gif"

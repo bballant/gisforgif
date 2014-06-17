@@ -9,5 +9,6 @@ pom.xml.asc
 *.MOV
 *.png
 *.swp
+.DS_Store
 /.lein-*
 /.nrepl-port
